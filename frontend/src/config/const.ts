@@ -1,3 +1,10 @@
 export const LOTTO_LIMIT = 39;
-
 export const TICKET_PRICE = 500;
+export const INITIAL_PLAYER_NAME = 'Player';
+export const INITIAL_PLAYER_BALANCE = 10000;
+export const INITIAL_HOUSE_BALANCE = 0;
+export const PRIZE_POOL_RATIO = 80;
+export const PRIZE_5_MATCH_PERCENT = 74;
+export const PRIZE_4_MATCH_PERCENT = 18;
+export const PRIZE_3_MATCH_PERCENT = 6;
+export const PRIZE_2_MATCH_PERCENT = 2;

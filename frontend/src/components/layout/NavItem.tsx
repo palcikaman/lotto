@@ -11,10 +11,7 @@ const StyledNavlink = styled(NavLink)({
 });
 
 export const NavItem = ({ children, ...props }: NavLinkProps) => (
-  <StyledNavlink
-    {...props}
-    className={({ isActive }) => (isActive ? 'active' : '')}
-  >
+  <StyledNavlink {...props} className={({ isActive }) => (isActive ? 'active' : '')}>
     {children}
   </StyledNavlink>
 );

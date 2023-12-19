@@ -1,13 +1,8 @@
-import {
-  IconButton,
-  Stack,
-  TextField,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { IconButton, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import { useStore } from '../../../config/store.ts';
 import { useState } from 'react';
 import { Cancel, Done, Edit } from '@mui/icons-material';
+import { Akce } from '../../../components/Akce.tsx';
 
 export const PlayerHeader = () => {
   const { player, setPlayerName } = useStore();
@@ -62,7 +57,7 @@ export const PlayerHeader = () => {
         )}
       </Stack>
       <Typography>
-        Balance: <strong>{player.balance}</strong> akçe
+        Balance: <Akce value={player.balance} />
       </Typography>
     </Stack>
   );

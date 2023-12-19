@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Button,
-  Collapse,
-  IconButton,
-  Stack,
-  TextField,
-  Tooltip,
-} from '@mui/material';
+import { Alert, Button, Collapse, IconButton, Stack, TextField, Tooltip } from '@mui/material';
 import { getRandomNumbers } from '../../../utils/functions.ts';
 import { useState } from 'react';
 import { useStore } from '../../../config/store.ts';
@@ -28,11 +20,7 @@ export const NumberGenerator = () => {
           color="error"
           action={
             <Tooltip title="Close">
-              <IconButton
-                onClick={() => setError(null)}
-                color="error"
-                size="small"
-              >
+              <IconButton onClick={() => setError(null)} color="error" size="small">
                 <Close />
               </IconButton>
             </Tooltip>
@@ -58,6 +46,7 @@ export const NumberGenerator = () => {
               }
               setTicketCount('');
               setError(null);
+              setNewTicketOpen(false);
             } else {
               setError('Number needed');
             }
@@ -80,7 +69,7 @@ export const NumberGenerator = () => {
                 setError(null);
               }}
             >
-              Cancel
+              Close
             </Button>
           </Stack>
         </Stack>

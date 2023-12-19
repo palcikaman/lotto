@@ -12,3 +12,7 @@ export const getRandomNumbers = () => {
 
   return numbers.sort((a, b) => a - b);
 };
+
+export const countNumbersIntersection = (a: number[], b: number[]) => {
+  return a.reduce((result, currentValue) => (b.includes(currentValue) ? result + 1 : result), 0);
+};

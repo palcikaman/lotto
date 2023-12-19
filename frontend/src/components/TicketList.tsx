@@ -1,45 +1,81 @@
 import { Ticket } from '../config/types.ts';
-import { Chip, Divider, Stack, Tooltip, Typography } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { format } from 'date-fns';
 import { Casino, Person } from '@mui/icons-material';
+import { NumberList } from './NumberList.tsx';
 import { useStore } from '../config/store.ts';
+import { countNumbersIntersection } from '../utils/functions.ts';
+import { Akce } from './Akce.tsx';
 
 type TicketListProps = {
   tickets: Ticket[];
+  showOwner?: boolean;
 };
 
-export const TicketList = ({ tickets }: TicketListProps) => {
-  const { winningNumbers } = useStore();
+export const TicketList = ({ tickets, showOwner }: TicketListProps) => {
+  const { results } = useStore();
 
   return (
-    <Stack alignItems="center">
-      {tickets.map((ticket) => (
-        <Stack key={ticket.created.toString()} marginY={2} gap={1} width={250}>
-          <Stack direction="row" justifyContent="space-between">
-            <Typography>{format(ticket.created, 'Pp')}</Typography>
-            {ticket.owner === 'player' ? (
-              <Tooltip title="Player">
-                <Person color="primary" />
-              </Tooltip>
-            ) : (
-              <Tooltip title="Generated">
-                <Casino color="primary" />
-              </Tooltip>
-            )}
-          </Stack>
-          <Stack direction="row" justifyContent="space-between" gap={1}>
-            {ticket.numbers.map((number) => (
-              <Chip
-                key={number}
-                label={number + 1}
-                sx={{ height: 40, width: 40 }}
-                color={winningNumbers?.includes(number) ? 'success' : 'primary'}
-              />
-            ))}
-          </Stack>
-          <Divider />
-        </Stack>
-      ))}
-    </Stack>
+    !!tickets.length && (
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Numbers</TableCell>
+              {results && <TableCell align="right">Prize</TableCell>}
+              <TableCell align="right">Date</TableCell>
+              {showOwner && <TableCell align="right">Owner</TableCell>}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tickets.map((ticket, index) => {
+              const hitCount =
+                results && countNumbersIntersection(ticket.numbers, results.winningNumbers);
+
+              const prize =
+                (hitCount === 2 || hitCount === 3 || hitCount === 4 || hitCount === 5) &&
+                results?.prize[hitCount];
+
+              return (
+                // TODO unique ticket id
+                <TableRow key={index}>
+                  <TableCell>
+                    <NumberList numbers={ticket.numbers} />
+                  </TableCell>
+                  {results && (
+                    <TableCell align="right">{prize && <Akce value={prize} />}</TableCell>
+                  )}
+                  <TableCell align="right">
+                    <Typography>{format(ticket.created, 'Pp')}</Typography>
+                  </TableCell>
+                  {showOwner && (
+                    <TableCell align="right">
+                      {ticket.owner === 'player' ? (
+                        <Tooltip title="Player">
+                          <Person color="primary" />
+                        </Tooltip>
+                      ) : (
+                        <Tooltip title="Generated">
+                          <Casino color="primary" />
+                        </Tooltip>
+                      )}
+                    </TableCell>
+                  )}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )
   );
 };

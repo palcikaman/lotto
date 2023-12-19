@@ -1,30 +1,29 @@
-import { Button, Chip, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { useStore } from '../../../config/store.ts';
 import { getRandomNumbers } from '../../../utils/functions.ts';
+import { Akce } from '../../../components/Akce.tsx';
 
 export const HouseHeader = () => {
-  const { house, winningNumbers, setWinningNumbers } = useStore();
+  const { house, results, generateResults, newRound, reset } = useStore();
 
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
-      {winningNumbers ? (
-        <Stack direction="row" gap={1}>
-          {winningNumbers.map((number) => (
-            <Chip
-              key={number}
-              label={number + 1}
-              sx={{ height: 40, width: 40 }}
-              color="primary"
-            />
-          ))}
-        </Stack>
-      ) : (
-        <Button onClick={() => setWinningNumbers(getRandomNumbers())}>
-          start
+      <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2}>
+        {results ? (
+          <Button onClick={() => newRound()} variant="contained">
+            new round
+          </Button>
+        ) : (
+          <Button onClick={() => generateResults(getRandomNumbers())} variant="contained">
+            draw
+          </Button>
+        )}
+        <Button onClick={() => reset()} color="error">
+          new game
         </Button>
-      )}
+      </Stack>
       <Typography>
-        Balance: <strong>{house.balance}</strong> akçe
+        Balance: <Akce value={house.balance} />
       </Typography>
     </Stack>
   );

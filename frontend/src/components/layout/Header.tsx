@@ -1,6 +1,6 @@
 import { AppBar, Stack, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import logo from '../../../public/assets/favicon.svg';
+import logo from '/assets/favicon.svg';
 import { NavItem } from './NavItem.tsx';
 
 export const Header = () => (
@@ -9,9 +9,7 @@ export const Header = () => (
       <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
         <Stack direction="row" gap={1} alignItems="center">
           <img src={logo} alt="Lotto logo" style={{ height: 24 }} />
-          <Typography sx={{ fontSize: 20, fontWeight: 'bold' }}>
-            Lottokeeper
-          </Typography>
+          <Typography sx={{ fontSize: 20, fontWeight: 'bold' }}>Lottokeeper</Typography>
         </Stack>
       </Link>
       <Stack direction="row" justifyContent="end" gap={4} width="100%">

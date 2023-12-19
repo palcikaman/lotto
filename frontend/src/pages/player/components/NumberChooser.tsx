@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import {
-  Alert,
-  Box,
-  Button,
-  Collapse,
-  IconButton,
-  Stack,
-  Tooltip,
-} from '@mui/material';
+import { Alert, Box, Button, Collapse, IconButton, Stack, Tooltip } from '@mui/material';
 import { Add, Casino, Close } from '@mui/icons-material';
 import { LOTTO_LIMIT, TICKET_PRICE } from '../../../config/const.ts';
 import { getRandomNumbers } from '../../../utils/functions.ts';
@@ -37,11 +29,7 @@ export const NumberChooser = () => {
           color="error"
           action={
             <Tooltip title="Close">
-              <IconButton
-                onClick={() => setError(null)}
-                color="error"
-                size="small"
-              >
+              <IconButton onClick={() => setError(null)} color="error" size="small">
                 <Close />
               </IconButton>
             </Tooltip>
@@ -69,14 +57,10 @@ export const NumberChooser = () => {
                   color="primary"
                   sx={(theme) => ({
                     border: '1px solid',
-                    background: selected
-                      ? theme.palette.primary.main
-                      : undefined,
+                    background: selected ? theme.palette.primary.main : undefined,
                     color: selected ? 'white' : undefined,
                     '&:hover': {
-                      background: selected
-                        ? theme.palette.primary.light
-                        : undefined,
+                      background: selected ? theme.palette.primary.light : undefined,
                     },
                   })}
                 >
@@ -86,10 +70,7 @@ export const NumberChooser = () => {
             })}
 
             <Tooltip title="Random">
-              <IconButton
-                onClick={() => setNumbers(getRandomNumbers())}
-                color="primary"
-              >
+              <IconButton onClick={() => setNumbers(getRandomNumbers())} color="primary">
                 <Casino />
               </IconButton>
             </Tooltip>
@@ -122,7 +103,7 @@ export const NumberChooser = () => {
                 setError(null);
               }}
             >
-              Cancel
+              Close
             </Button>
           </>
         ) : (
