@@ -6,11 +6,11 @@ import { getRandomNumbers } from '../../../utils/functions.ts';
 import { useStore } from '../../../config/store.ts';
 
 export const NumberChooser = () => {
-  const { player, addTicket } = useStore();
+  const { player, tickets, addTicket } = useStore();
 
   const [error, setError] = useState<string | null>(null);
 
-  const [newTicketOpen, setNewTicketOpen] = useState(false);
+  const [newTicketOpen, setNewTicketOpen] = useState(!tickets.length);
 
   const [numbers, setNumbers] = useState<number[]>([]);
 

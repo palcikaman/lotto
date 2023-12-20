@@ -15,7 +15,7 @@ export const Header = () => (
       <Stack direction="row" justifyContent="end" gap={4} width="100%">
         <NavItem to="/player">Player</NavItem>
         <NavItem to="/house">House</NavItem>
-        <NavItem to="/info">Info</NavItem>
+        <NavItem to="/info">Questions</NavItem>
       </Stack>
     </Toolbar>
   </AppBar>
