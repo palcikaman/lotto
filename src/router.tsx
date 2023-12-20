@@ -4,6 +4,8 @@ import { Home } from './pages/Home.tsx';
 import { Player } from './pages/player/Player.tsx';
 import { House } from './pages/house/House.tsx';
 import { Info } from './pages/Info.tsx';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Alert } from '@mui/material';
 
 export const router = createBrowserRouter(
   [
@@ -11,9 +13,14 @@ export const router = createBrowserRouter(
       path: '/',
 
       element: (
-        <Layout>
-          <Outlet />
-        </Layout>
+        <ErrorBoundary
+          FallbackComponent={() => <Alert color="error">Error</Alert>}
+          onError={(error) => console.error(error)}
+        >
+          <Layout>
+            <Outlet />
+          </Layout>
+        </ErrorBoundary>
       ),
       children: [
         {
